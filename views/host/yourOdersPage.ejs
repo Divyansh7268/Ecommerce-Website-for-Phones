@@ -1,0 +1,43 @@
+<%- include('../partials/head.ejs') %>
+<body class="bg-gradient-to-br from-blue-100 via-white to-pink-100 min-h-screen">
+  <div class="max-w-4xl mx-auto pt-20 px-4">
+    <h1 class="text-4xl font-extrabold text-center text-blue-700 mb-12 tracking-wide drop-shadow">Your Orders</h1>
+    <% if (phoneDetails && phoneDetails.length > 0) { %>
+      <div class="space-y-8">
+        <% phoneDetails.forEach(phone => { %>
+          <div class="flex flex-col md:flex-row items-center bg-white rounded-2xl shadow-xl p-6 gap-8 border border-blue-200 hover:shadow-2xl transition">
+            <img src="<%= phone.phoneImage1 %>" alt="Phone" class="w-32 h-32 object-cover rounded-xl border-2 border-blue-300 shadow">
+            <div class="flex-1 w-full">
+              <div class="font-bold text-2xl text-gray-800 mb-2 tracking-wide"><%= phone.phoneName %></div>
+              <div class="text-blue-600 font-semibold mb-2 text-lg">₹<%= phone.phonePrice %></div>
+              <div class="flex items-center mb-3">
+                <% 
+                  const rating = Math.round(Number(phone.phoneRating) || 0);
+                  for(let i=0; i<rating; i++) { %>
+                    <svg class="w-5 h-5 text-yellow-400 inline" fill="currentColor" viewBox="0 0 20 20"><polygon points="9.9,1.1 7.6,6.6 1.6,7.6 6,11.9 4.8,17.8 9.9,14.8 15,17.8 13.8,11.9 18.2,7.6 12.2,6.6 "/></svg>
+                <% } %>
+                <% for(let i=rating; i<5; i++) { %>
+                    <svg class="w-5 h-5 text-gray-300 inline" fill="currentColor" viewBox="0 0 20 20"><polygon points="9.9,1.1 7.6,6.6 1.6,7.6 6,11.9 4.8,17.8 9.9,14.8 15,17.8 13.8,11.9 18.2,7.6 12.2,6.6 "/></svg>
+                <% } %>
+                <span class="ml-2 text-sm text-gray-600"><%= phone.phoneRating %></span>
+              </div>
+              <div class="flex flex-wrap gap-4 mt-2">
+                <span class="inline-block bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold shadow">RAM/ROM: <%= phone.ramRom %></span>
+                <span class="inline-block bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold shadow">Battery: <%= phone.battery %></span>
+                <span class="inline-block bg-blue-50 text-blue-700 px-3 py-1 rounded-full text-xs font-semibold shadow">Camera: <%= phone.camera %></span>
+              </div>
+            </div>
+            <form action="/order/cancel/<%= phone.id %>" method="POST" class="mt-6 md:mt-0">
+              <button type="submit" class="bg-gradient-to-r from-red-500 to-pink-500 text-white px-6 py-2 rounded-xl hover:from-red-600 hover:to-pink-600 transition font-bold shadow-lg tracking-wide text-base">
+                Cancel Order
+              </button>
+            </form>
+          </div>
+        <% }) %>
+      </div>
+    <% } else { %>
+      <div class="text-center text-gray-500 text-lg mt-32">You have no orders yet.</div>
+    <% } %>
+  </div>
+</body>
+</html>

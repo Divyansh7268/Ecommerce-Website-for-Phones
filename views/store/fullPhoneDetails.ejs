@@ -1,0 +1,66 @@
+<%- include('../partials/head.ejs') %>
+<body class="bg-gradient-to-br from-blue-100 via-white to-pink-100 min-h-screen">
+  <% phoneDetails.forEach(phone  => { %>
+  <div class="max-w-3xl mx-auto mt-16 bg-white/95 p-10 rounded-3xl shadow-2xl border border-blue-200">
+    <!-- Phone Name -->
+    <h1 class="text-3xl font-extrabold text-center text-blue-700 mb-8 tracking-wide drop-shadow"><%= phone.phoneName %></h1>
+    
+    <!-- Image Gallery -->
+    <div>
+      <div class="flex justify-center mb-6">
+        <img id="mainImage" src="<%= phone.phoneImage1 %>" alt="Phone Image" class="w-72 h-80 object-cover rounded-2xl border-4 border-blue-400 shadow-xl transition-all duration-200">
+      </div>
+      <div class="flex justify-center gap-4 mb-8">
+        <img onclick="showImage('<%= phone.phoneImage1 %>')" src="<%= phone.phoneImage1 %>" alt="Phone Image 1" class="w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-gray-300 hover:border-blue-500 ring-2 ring-transparent hover:ring-blue-400 transition">
+        <img onclick="showImage('<%= phone.phoneImage2 %>')" src="<%= phone.phoneImage2 %>" alt="Phone Image 2" class="w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-gray-300 hover:border-blue-500 ring-2 ring-transparent hover:ring-blue-400 transition">
+        <img onclick="showImage('<%= phone.phoneImage3 %>')" src="<%= phone.phoneImage3 %>" alt="Phone Image 3" class="w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-gray-300 hover:border-blue-500 ring-2 ring-transparent hover:ring-blue-400 transition">
+        <img onclick="showImage('<%= phone.phoneImage4 %>')" src="<%= phone.phoneImage4 %>" alt="Phone Image 4" class="w-20 h-20 object-cover rounded-lg cursor-pointer border-2 border-gray-300 hover:border-blue-500 ring-2 ring-transparent hover:ring-blue-400 transition">
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex flex-wrap justify-center gap-6 mb-10">
+      <form action="/order" method="POST">
+        <button class="bg-gradient-to-r from-blue-600 to-pink-500 text-white px-8 py-2 rounded-xl hover:from-blue-700 hover:to-pink-600 transition font-bold shadow-lg tracking-wide text-lg">Buy Now</button>
+        <input type="hidden" name="id" value="<%= phone.id %>">
+      </form>
+      <%- include('./viewCartButton.ejs') %>
+      <%- include('./favoriteButton.ejs') %>
+    </div>
+
+    <!-- Phone Details -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-gray-700">
+      <div>
+        <h2 class="font-semibold mb-1 text-blue-700">Camera</h2>
+        <p class="bg-blue-50 rounded-lg px-4 py-2 shadow-sm"><%= phone.camera %></p>
+      </div>
+      <div>
+        <h2 class="font-semibold mb-1 text-blue-700">Processor</h2>
+        <p class="bg-blue-50 rounded-lg px-4 py-2 shadow-sm"><%= phone.processor %></p>
+      </div>
+      <div>
+        <h2 class="font-semibold mb-1 text-blue-700">Battery</h2>
+        <p class="bg-blue-50 rounded-lg px-4 py-2 shadow-sm"><%= phone.battery %></p>
+      </div>
+      <div>
+        <h2 class="font-semibold mb-1 text-blue-700">RAM/ROM</h2>
+        <p class="bg-blue-50 rounded-lg px-4 py-2 shadow-sm"><%= phone.ramRom %></p>
+      </div>
+      <div>
+        <h2 class="font-semibold mb-1 text-blue-700">Display</h2>
+        <p class="bg-blue-50 rounded-lg px-4 py-2 shadow-sm"><%= phone.display %></p>
+      </div>
+      <div class="sm:col-span-2">
+        <h2 class="font-semibold mb-1 text-blue-700">Other Details</h2>
+        <p class="bg-blue-50 rounded-lg px-4 py-2 shadow-sm"><%= phone.otherDetails %></p>
+      </div>
+    </div>
+  </div>
+  <% }); %>
+  <script>
+    function showImage(src) {
+      document.getElementById('mainImage').src = src;
+    }
+  </script>
+</body>
+</html>

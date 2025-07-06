@@ -1,0 +1,7 @@
+<% phoneDetails.forEach(phone  => { %>
+<form action="/favorites" method="POST">
+  <button type="submit"
+    class="bg-gradient-to-r from-blue-600 to-pink-500 text-white px-8 py-2 rounded-xl hover:from-blue-700 hover:to-pink-600 transition font-bold shadow-lg tracking-wide text-lg">Add To Favorite</button>
+  <input type="hidden" name="id" value="<%=phone.id %>">
+</form>
+<% }); %>

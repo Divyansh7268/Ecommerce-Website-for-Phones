@@ -1,0 +1,65 @@
+<%- include('../partials/head.ejs') %>
+<body class="bg-gradient-to-br from-blue-100 via-white to-pink-100 min-h-screen">
+    <nav class="fixed top-0 left-0 w-full bg-white/90 shadow-lg z-50 backdrop-blur">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-3xl font-extrabold text-blue-700 tracking-wide drop-shadow">MobileShop</div>
+            <ul class="flex space-x-6 font-semibold text-gray-700">
+                <li><a href="/" class="hover:text-blue-600 transition">Home</a></li>
+                <% if (isLoggedIn){ %>
+                    <li><a href="/viewcart" class="hover:text-blue-600 transition">View Cart</a></li>
+                    <li><a href="/favorites" class="hover:text-blue-600 transition">Favorites</a></li>
+                    <li><a href="/addphone" class="hover:text-blue-600 transition">Add Phones</a></li>
+                    <li><a href="/hostphone" class="hover:text-blue-600 transition">Host Phones</a></li>
+                    <li><a href="/order" class="hover:text-blue-600 transition">Your Orders</a></li>
+                    <li><a href="/about" class="hover:text-blue-600 transition">About</a></li>
+                <% } %>
+                <% if(!isLoggedIn){ %>
+                    <li><a href="/login" class="hover:text-blue-600 transition">Login</a></li>
+                <% } else { %>
+                    <li>
+                        <form action="/logout" method="POST" style="display:inline;">
+                            <button type="submit"
+                                class="hover:text-blue-600 font-semibold bg-transparent border-none cursor-pointer transition">Logout</button>
+                        </form>
+                    </li>
+                <% } %>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="pt-24 max-w-7xl mx-auto px-4">
+        <section>
+            <h2 class="text-2xl font-bold mb-6 text-blue-700 tracking-wide drop-shadow text-center">All Phones</h2>
+            <div id="phoneGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                <% phoneDetails.forEach(phone=> { %>
+                    <a href="/full-details/<%=phone.id%>" class="group">
+                        <div
+                            class="bg-white rounded-2xl shadow-xl p-5 flex flex-col items-center transition-transform duration-200 hover:scale-105 hover:shadow-2xl hover:ring-4 hover:ring-blue-300/30 border border-blue-100 group-hover:bg-blue-50">
+                            <img src="<%= phone.phoneImage1 %>" alt="Phone"
+                                class="w-full h-44 object-cover rounded-xl mb-4 shadow group-hover:shadow-lg transition">
+                            <div class="mt-2 font-bold text-lg text-gray-800 group-hover:text-blue-700 transition">
+                                <%= phone.phoneName %>
+                            </div>
+                            <div class="text-blue-600 font-semibold mb-1 text-lg">₹<%= phone.phonePrice %></div>
+                            <div class="flex items-center mb-2">
+                                <% const rating=Math.round(Number(phone.phoneRating) || 0); for(let i=0; i<rating; i++) { %>
+                                    <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                                        <polygon
+                                            points="9.9,1.1 7.6,6.6 1.6,7.6 6,11.9 4.8,17.8 9.9,14.8 15,17.8 13.8,11.9 18.2,7.6 12.2,6.6 " />
+                                    </svg>
+                                <% } %>
+                                <% for(let i=rating; i<5; i++) { %>
+                                    <svg class="w-5 h-5 text-gray-300" fill="currentColor" viewBox="0 0 20 20">
+                                        <polygon
+                                            points="9.9,1.1 7.6,6.6 1.6,7.6 6,11.9 4.8,17.8 9.9,14.8 15,17.8 13.8,11.9 18.2,7.6 12.2,6.6 " />
+                                <% } %>
+                                <span class="ml-2 text-sm text-gray-600"><%= phone.phoneRating %></span>
+                            </div>
+                        </div>
+                    </a>
+                <% }) %>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

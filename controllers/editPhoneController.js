@@ -14,7 +14,7 @@ exports.editPhoneController =(req,res,next)=>{
     // phoneDetails : [{}]  
     editing : editing,
     phone:phone,
-    isLoggedIn : req.isLoggedIn
+    isLoggedIn : res.locals.isLoggedIn
     
 
   })

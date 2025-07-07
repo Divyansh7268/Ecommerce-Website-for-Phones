@@ -5,7 +5,7 @@ exports.hostPhonesController = (req,res,next)=>{
     res.render('host/hostPhones.ejs',{
       title : "Host Phones",
       phoneDetails : phoneDetails,
-      isLoggedIn : req.isLoggedIn
+      isLoggedIn : res.locals.isLoggedIn
     })
   })
 }

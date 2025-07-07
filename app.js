@@ -1,6 +1,7 @@
 //Internal Modules
 const express = require('express');
 const path = require('path');
+const cookieParser = require('cookie-parser');
 
 //External Modules
 const {homePageRouter} = require('./routes/homePageRouter');
@@ -23,16 +24,6 @@ const { aboutPageRouter } = require('./routes/aboutPageRouter');
 
 
 
-
-
-
-
-
-
-
-
-
-
 const app = express();
 
 app.set('view engine','ejs');
@@ -47,7 +38,15 @@ app.use((req,res,next)=>{
 app.use(express.static(path.join(rootDir,'public')));
 //decoding Url
 app.use(express.urlencoded({extended : true}));
-//login middleware
+app.use(cookieParser());
+
+//(ab logout hone ke baad baki options nhi dikhenge)
+app.use((req, res, next) => {
+  res.locals.isLoggedIn = req.cookies.isLoggedIn === 'true';
+  next();
+});
+
+//login middleware 
 app.use((req,res,next)=>{
   req.isLoggedIn = req.get('Cookie')?.split('=')[1] || false;
   console.log(req.isLoggedIn);
@@ -85,7 +84,7 @@ app.use(aboutPageRouter);
 app.use((req,res,next)=>{
   res.status(404).render('host/errorPage.ejs',{
     title : "Error",
-    isLoggedIn : req.isLoggedIn
+    isLoggedIn : res.locals.isLoggedIn
   })
 })
 

@@ -7,7 +7,7 @@ exports.fullPhoneDetailscontroller = (req, res, next) => {
     res.render('store/fullPhoneDetails.ejs', {
       title: "Phone Details",
       phoneDetails: [phone], // or just phone if you want a single object
-      isLoggedIn : req.isLoggedIn
+      isLoggedIn : res.locals.isLoggedIn
     });
   });
 }

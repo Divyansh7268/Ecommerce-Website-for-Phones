@@ -14,7 +14,7 @@ exports.AllPhoneData = (req,res,next)=>{
 
   res.render('store/submit.ejs',{
      title : 'Submit',
-     isLoggedIn : req.isLoggedIn
+     isLoggedIn : res.locals.isLoggedIn
    });
 
   }

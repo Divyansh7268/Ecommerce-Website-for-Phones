@@ -6,7 +6,7 @@ exports.homeController = (req,res,next) =>{
   res.render('host/HomePage.ejs',{
   title : "MobileShop",
   phoneDetails : phoneDetails,
-  isLoggedIn : req.isLoggedIn
+  isLoggedIn : res.locals.isLoggedIn
   });
 
   })

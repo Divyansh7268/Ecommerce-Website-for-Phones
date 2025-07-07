@@ -4,6 +4,6 @@ exports.addPhoneController = (req,res,next) =>{
     title : "Add Phones",
     phoneDetails : [{}],
     editing : false,
-    isLoggedIn : req.isLoggedIn
+    isLoggedIn : res.locals.isLoggedIn
   })
 };

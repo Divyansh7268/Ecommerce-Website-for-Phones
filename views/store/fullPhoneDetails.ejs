@@ -19,7 +19,9 @@
     </div>
 
     <!-- Action Buttons -->
+     <% if (isLoggedIn){ %>
     <div class="flex flex-wrap justify-center gap-6 mb-10">
+      
       <form action="/order" method="POST">
         <button class="bg-gradient-to-r from-blue-600 to-pink-500 text-white px-8 py-2 rounded-xl hover:from-blue-700 hover:to-pink-600 transition font-bold shadow-lg tracking-wide text-lg">Buy Now</button>
         <input type="hidden" name="id" value="<%= phone.id %>">
@@ -27,7 +29,13 @@
       <%- include('./viewCartButton.ejs') %>
       <%- include('./favoriteButton.ejs') %>
     </div>
-
+<% } else { %>
+      <div class="flex flex-wrap justify-center gap-6 mb-10">
+        <button class="bg-gray-400 text-white px-8 py-2 rounded-xl font-bold shadow-lg tracking-wide text-lg cursor-not-allowed" disabled>Buy Now (Login Required)</button>
+        <button class="bg-gray-400 text-white px-8 py-2 rounded-xl font-bold shadow-lg tracking-wide text-lg cursor-not-allowed" disabled>Add to Cart (Login Required)</button>
+        <button class="bg-gray-400 text-white px-8 py-2 rounded-xl font-bold shadow-lg tracking-wide text-lg cursor-not-allowed" disabled>Add to Favorites (Login Required)</button>
+      </div>
+    <% } %>
     <!-- Phone Details -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-gray-700">
       <div>

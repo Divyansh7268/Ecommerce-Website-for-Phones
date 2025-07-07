@@ -7,18 +7,19 @@
   "type": "commonjs",
   "main": "app.js",
   "scripts": {
+    
     "test": "echo \"Error: no test specified\" && exit 1",
-    "tailwind": "npx @tailwindcss/cli -i ./public/input.css -o ./public/output.css --watch",
-    "start": "nodemon app.js & npm run tailwind "
+   "build:tailwind": "npx tailwindcss -i ./public/input.css -o ./public/output.css",
+  "start": "node app.js"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "tailwindcss": "^4.1.11"
   },
   "dependencies": {
     "@tailwindcss/cli": "^4.1.8",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
-    "express-validator": "^7.2.1",
-    "tailwindcss": "^4.1.8"
+    "express-validator": "^7.2.1"
   }
 }

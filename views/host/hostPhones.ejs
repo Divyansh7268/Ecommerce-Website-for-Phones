@@ -78,5 +78,19 @@
             </div>
         </section>
     </main>
+    <script>
+      // Responsive nav menu toggle
+      const menuBtn = document.getElementById('menuBtn');
+      const navLinks = document.getElementById('navLinks');
+      menuBtn?.addEventListener('click', () => {
+        navLinks.classList.toggle('hidden');
+      });
+      // Optional: Hide menu on link click (mobile)
+      navLinks?.querySelectorAll('a,button').forEach(el => {
+        el.addEventListener('click', () => {
+          if(window.innerWidth < 768) navLinks.classList.add('hidden');
+        });
+      });
+    </script>
 </body>
 </html>

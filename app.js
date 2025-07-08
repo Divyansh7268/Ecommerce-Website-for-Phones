@@ -17,9 +17,10 @@ const { deletePhoneRouter } = require('./routes/deletePhoneRouter');
 const { favoritesPageRouter } = require('./routes/favoritesPageRouter');
 const { viewCartRouter } = require('./routes/viewCartRouter');
 const { orderPageRouter } = require('./routes/orderPageRouter');
+const { aboutPageRouter } = require('./routes/aboutPageRouter');
 const rootDir = require('./Utils/pathUtils');
 const { title } = require('process');
-const { aboutPageRouter } = require('./routes/aboutPageRouter');
+
 
 
 
